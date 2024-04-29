@@ -1,1 +1,2 @@
-# GCS-TRAB1
+Grupo: 
+Classes: Departamento, Item, Usuario, Main, App, Pedido
