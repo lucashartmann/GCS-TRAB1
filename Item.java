@@ -15,10 +15,21 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item: " + descricao + ", Valor Unitário: " + valorUnitario + ", Quantidade: " + quantidade + ", Total: " + calcularTotal();
+        return "Descrição: " + descricao + ", Valor Unitário: " + valorUnitario + ", Quantidade: " + quantidade
+                + ", Total: "
+                + calcularTotal();
     }
 
-    // Métodos getters 
+    public String getDescricao() {
+        return descricao;
+    }
 
-    
+    public double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
 }
