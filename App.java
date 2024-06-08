@@ -1,3 +1,7 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -147,4 +151,79 @@ public class App {
             System.out.println("Usuário atual alterado para: " + usuarioAtual.getNome());
         }
     }
+
+    public Date converterStringParaData(String dataString) {
+        Date data = null;
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            data = formato.parse(dataString);
+        } catch (ParseException e) {
+            System.out.println("Erro ao converter a data.");
+        }
+        return data;
+    }
+
+    public void registrarNovoPedido() {
+        Departamento departamento = usuarioAtual.getDepartamento();
+        double total = 0;
+        System.out.print("Data do pedido (formato dd/MM/yyyy): ");
+        String dataString = scanner.next();
+        Date dataPedido = converterStringParaData(dataString);
+        if (dataPedido == null) {
+            System.out.println("Data inválida. Use o formato dd/MM/yyyy.");
+            return;
+        }
+        System.out.print("Data de conclusão do pedido (formato dd/MM/yyyy): ");
+        String dataConclusaoString = scanner.next();
+        Date dataConclusao = converterStringParaData(dataConclusaoString);
+        if (dataConclusao == null) {
+            System.out.println("Data de conclusão inválida. Use o formato dd/MM/yyyy.");
+            return;
+        }
+        List<Item> itens = new ArrayList<>();
+        while (true) {
+            System.out.println("\nAdicionar Item ao Pedido:");
+            System.out.print("Descrição do item (ou 'fim' para terminar): ");
+            String descricao = scanner.next();
+            if (descricao.equalsIgnoreCase("fim")) {
+                break;
+            }
+            double valorUnitario;
+            while (true) {
+                System.out.print("Valor unitário: ");
+                try {
+                    valorUnitario = scanner.nextDouble();
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("Valor unitário inválido. Insira um número válido.");
+                    scanner.next();
+                }
+            }
+            System.out.print("Quantidade: ");
+            int quantidade;
+            while (true) {
+                try {
+                    quantidade = scanner.nextInt();
+                    break;
+                } catch (InputMismatchException e) {
+                    System.out.println("Quantidade inválida. Insira um número inteiro válido.");
+                    scanner.next();
+                }
+            }
+            itens.add(new Item(descricao, valorUnitario, quantidade));
+        }
+        for (Item item : itens) {
+            total += item.getValorUnitario() * item.getQuantidade();
+        }
+        System.out.print("Status do pedido (aberto, aprovado, reprovado): ");
+        String statusPedido = scanner.next();
+        if (!statusPedido.equalsIgnoreCase("aberto") && !statusPedido.equalsIgnoreCase("aprovado")
+                && !statusPedido.equalsIgnoreCase("reprovado")) {
+            System.out.println("Status do pedido inválido. Use 'aberto', 'aprovado' ou 'reprovado'.");
+            return;
+        }
+        Pedido pedido = new Pedido(usuarioAtual, departamento, dataPedido, dataConclusao, statusPedido, itens, total);
+        sistema.adicionarPedido(pedido);
+    }
+
 }
