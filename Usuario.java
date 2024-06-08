@@ -1,13 +1,32 @@
+import java.util.ArrayList;
+
 public class Usuario {
-private int id;
-private String nome;
+    private int id;
+    private String nome;
+    private Departamento departamento;
+    private boolean isAdmin;
 
-private Boolean tipo;
+    ArrayList<Usuario> centralUsuarios;
 
-    public Usuario(int id, String nome, Boolean tipo) {
+    public Usuario(int id, String nome, Boolean isAdmin, Departamento departamento) {
+        centralUsuarios = new ArrayList<>();
         this.id = id;
         this.nome = nome;
-        this.tipo = tipo;
+        this.isAdmin = isAdmin;
+        this.departamento = departamento;
+    }
+
+    public void addUsuario(Usuario usuario) {
+        centralUsuarios.add(usuario);
+    }
+
+    public Usuario getUsuario(String nome) {
+        for (Usuario usuario : centralUsuarios) {
+            if (usuario.getNome().equals(nome)) {
+                return usuario;
+            }
+        }
+        return null;
     }
 
     public int getId() {
@@ -18,7 +37,11 @@ private Boolean tipo;
         return nome;
     }
 
-    public Boolean getTipo() {
-        return tipo;
+    public Boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
     }
 }
