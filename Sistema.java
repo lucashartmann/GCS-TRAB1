@@ -78,4 +78,39 @@ public class Sistema {
         }
     }
 
+    public void buscarPedidosPorFuncionario(Usuario funcionario) {
+        List<Pedido> pedidosDoFuncionario = new ArrayList<>();
+        for (Pedido pedido : pedidos) {
+            if (pedido.getSolicitante().equals(funcionario)) {
+                pedidosDoFuncionario.add(pedido);
+            }
+        }
+        if (pedidosDoFuncionario.isEmpty()) {
+            System.out.println("Nenhum pedido encontrado");
+        } else {
+            for (Pedido pedido : pedidosDoFuncionario) {
+                System.out.println(pedido.toString());
+            }
+        }
+    }
+
+    public void buscarPedidosPelaDescricaoItem(String descricaoItem) {
+        List<Pedido> pedidosComItem = new ArrayList<>();
+        for (Pedido pedido : pedidos) {
+            for (Item item : pedido.getItens()) {
+                if (item.getDescricao().contains(descricaoItem)) {
+                    pedidosComItem.add(pedido);
+                    break;
+                }
+            }
+        }
+        if (pedidosComItem.isEmpty()) {
+            System.out.println("Nenhum pedido encontrado com a descrição do item: " + descricaoItem);
+        } else {
+            for (Pedido pedido : pedidosComItem) {
+                System.out.println(pedido.toString());
+            }
+        }
+    }
+
 }
