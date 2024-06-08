@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class App {
@@ -127,5 +128,23 @@ public class App {
         Usuario novoUsuario = new Usuario(id, nome, isAdmin, departamento);
         sistema.adicionarUsuario(novoUsuario);
         System.out.println("Usuário criado com sucesso!");
+    }
+
+    public void selecionarUsuarioAtual() {
+        System.out.println("Usuários Disponíveis:");
+        List<Usuario> usuarios = sistema.getUsuarios();
+        for (Usuario usuario : usuarios) {
+            System.out.println("Id: " + usuario.getId() + ", " + usuario.getNome());
+        }
+        System.out.print("Escolha o usuário digitando o Id: ");
+        int userId = scanner.nextInt();
+        Usuario novoUsuario = sistema.encontrarUsuarioPorId(userId);
+        if (novoUsuario == null) {
+            System.out.println("Usuário não encontrado.");
+            System.exit(userId);
+        } else {
+            usuarioAtual = novoUsuario;
+            System.out.println("Usuário atual alterado para: " + usuarioAtual.getNome());
+        }
     }
 }
