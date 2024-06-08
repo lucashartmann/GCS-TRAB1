@@ -268,4 +268,38 @@ public class App {
             sistema.listarPedidosEntreDatas(dataInicial, dataFinal);
         }
     }
+
+    public void buscarPedidosPorFuncionario() {
+        if (usuarioAtual.getIsAdmin() == false) {
+            System.out.println("Você não é administrador!");
+        } else {
+            sistema.buscarPedidosPorFuncionario(usuarioAtual);
+        }
+    }
+
+    public void buscarPedidosPelaDescricaoItem() {
+        if (usuarioAtual.getIsAdmin() == false) {
+            System.out.println("Você não é administrador!");
+        } else {
+            System.out.println("Digite uma descrição:");
+            String descricao = scanner.next();
+            sistema.buscarPedidosPelaDescricaoItem(descricao);
+        }
+    }
+
+    public void visualizarDetalhesPedido() {
+        if (usuarioAtual.getIsAdmin() == false) {
+            System.out.println("Você não é administrador!");
+        } else {
+            sistema.visualizarDetalhesPedido(usuarioAtual);
+        }
+    }
+
+    public void exibirEstatisticasGerais() {
+        if (usuarioAtual.getIsAdmin() == false) {
+            System.out.println("Você não é administrador!");
+        } else {
+            sistema.exibirEstatisticasGerais();
+        }
+    }
 }
