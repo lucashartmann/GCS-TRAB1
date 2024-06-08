@@ -246,4 +246,26 @@ public class App {
             System.out.println("Opção inválida. Operação cancelada.");
         }
     }
+
+    public void listarPedidosEntreDatas() {
+        if (usuarioAtual.getIsAdmin() == false) {
+            System.out.println("Você não é administrador!");
+        } else {
+            System.out.print("Digite a data inicial (formato dd/MM/yyyy): ");
+            String dataString = scanner.next();
+            Date dataInicial = converterStringParaData(dataString);
+            if (dataInicial == null) {
+                System.out.println("Data inválida. Use o formato dd/MM/yyyy.");
+                return;
+            }
+            System.out.print("Digite a data final (formato dd/MM/yyyy): ");
+            String dataConclusaoString = scanner.next();
+            Date dataFinal = converterStringParaData(dataConclusaoString);
+            if (dataFinal == null) {
+                System.out.println("Data inválida. Use o formato dd/MM/yyyy.");
+                return;
+            }
+            sistema.listarPedidosEntreDatas(dataInicial, dataFinal);
+        }
+    }
 }
