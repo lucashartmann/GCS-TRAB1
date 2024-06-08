@@ -79,10 +79,10 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido [solicitante=" + solicitante.getNome() + ", departamento=" + departamento.getNome()
-                + ", dataPedido=" + dataPedido
+        return "Pedido [solicitante=" + solicitante.getNome() + ", departamento=" + departamento.getNome() + ", dataPedido=" + dataPedido
                 + ", dataConclusao=" + dataConclusao + ", status=" + status + ", itens=" + itens + ", valorTotal="
                 + valorTotal + "]";
     }
 
+    
 }
