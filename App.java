@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class App {
-    
+
     Sistema sistema = new Sistema();;
     Usuario usuarioAtual;
     Scanner scanner = new Scanner(System.in);
@@ -105,5 +105,27 @@ public class App {
         Departamento novoDepartamento = new Departamento(nome, valorMaximo);
         sistema.adicionarDepartamento(novoDepartamento);
         System.out.println("Departamento criado com sucesso!");
+    }
+
+    public void criarNovoUsuario() {
+        System.out.println("Criar Novo Usuário:");
+        System.out.print("Identificador: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Nome: ");
+        String nome = scanner.nextLine();
+        System.out.print("Tipo (funcionário ou administrador): ");
+        String tipoString = scanner.nextLine();
+        boolean isAdmin = tipoString.equalsIgnoreCase("administrador");
+        System.out.print("Departamento: ");
+        String nomeDepartamento = scanner.nextLine();
+        Departamento departamento = sistema.encontrarDepartamentoPorNome(nomeDepartamento);
+        if (departamento == null) {
+            System.out.println("Departamento não encontrado.");
+            return;
+        }
+        Usuario novoUsuario = new Usuario(id, nome, isAdmin, departamento);
+        sistema.adicionarUsuario(novoUsuario);
+        System.out.println("Usuário criado com sucesso!");
     }
 }
