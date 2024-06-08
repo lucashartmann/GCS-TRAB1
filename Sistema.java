@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sistema {
@@ -17,5 +18,17 @@ public class Sistema {
 
     public List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    public void adicionarDepartamento(Departamento departamento) {
+        departamentos.add(departamento);
+    }
+
+    public void adicionarUsuario(Usuario usuario) {
+        usuarios.add(usuario);
+    }
+
+    public void adicionarPedido(Pedido pedido) {
+        pedidos.add(pedido);
     }
 }
