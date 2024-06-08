@@ -226,4 +226,24 @@ public class App {
         sistema.adicionarPedido(pedido);
     }
 
+    public void avaliarPedido() {
+        Pedido pedidoParaAvaliar = sistema.encontrarPedidosPorSolicitante(usuarioAtual);
+        if (pedidoParaAvaliar == null) {
+            System.out.println("Pedido não encontrado.");
+            return;
+        }
+        System.out.println("Detalhes do Pedido:");
+        System.out.println(pedidoParaAvaliar);
+        System.out.print("Deseja aprovar (a) ou rejeitar (r) este pedido? ");
+        String decisao = scanner.next();
+        if (decisao.equalsIgnoreCase("a")) {
+            pedidoParaAvaliar.setStatus("Aprovado");
+            System.out.println("Pedido aprovado com sucesso!");
+        } else if (decisao.equalsIgnoreCase("r")) {
+            pedidoParaAvaliar.setStatus("Rejeitado");
+            System.out.println("Pedido rejeitado com sucesso!");
+        } else {
+            System.out.println("Opção inválida. Operação cancelada.");
+        }
+    }
 }
