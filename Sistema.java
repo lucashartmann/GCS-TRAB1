@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Sistema {
     private List<Usuario> usuarios;
@@ -109,6 +110,32 @@ public class Sistema {
         } else {
             for (Pedido pedido : pedidosComItem) {
                 System.out.println(pedido.toString());
+            }
+        }
+    }
+
+    public void visualizarDetalhesPedido(Usuario solicitante) {
+        Pedido pedido = encontrarPedidosPorSolicitante(solicitante);
+        if (pedido == null) {
+            System.out.println("Pedido não encontrado.");
+            return;
+        }
+
+        System.out.println("Detalhes do Pedido:");
+        System.out.println(pedido);
+
+        if (pedido.getStatus().equalsIgnoreCase("aberto")) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Deseja aprovar (A) ou rejeitar (R) o pedido? ");
+            String resposta = scanner.next();
+            if (resposta.equalsIgnoreCase("A")) {
+                pedido.setStatus("Aprovado");
+                System.out.println("Pedido aprovado com sucesso!");
+            } else if (resposta.equalsIgnoreCase("R")) {
+                pedido.setStatus("Rejeitado");
+                System.out.println("Pedido rejeitado com sucesso!");
+            } else {
+                System.out.println("Opção inválida.");
             }
         }
     }
