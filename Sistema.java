@@ -59,4 +59,23 @@ public class Sistema {
         return null;
     }
 
+    public void listarPedidosEntreDatas(Date dataInicial, Date dataFinal) {
+        List<Pedido> pedidosEntreDatas = new ArrayList<>();
+        for (Pedido pedido : pedidos) {
+            Date dataPedido = pedido.getDataPedido();
+            if (dataPedido.after(dataInicial) && dataPedido.before(dataFinal)) {
+                pedidosEntreDatas.add(pedido);
+            } else {
+                System.out.println("Nenhum pedido nesse periodo de datas");
+            }
+        }
+        if (pedidosEntreDatas.isEmpty()) {
+            System.out.println("Nenhum pedido nesse periodo de datas");
+        } else {
+            for (Pedido pedido : pedidosEntreDatas) {
+                System.out.println(pedido.toString());
+            }
+        }
+    }
+
 }
