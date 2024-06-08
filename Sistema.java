@@ -31,4 +31,32 @@ public class Sistema {
     public void adicionarPedido(Pedido pedido) {
         pedidos.add(pedido);
     }
+
+    public Usuario encontrarUsuarioPorId(int id) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getId() == id) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    public Departamento encontrarDepartamentoPorNome(String nomeDepartamento) {
+        for (Departamento departamento : departamentos) {
+            if (departamento.getNome().equalsIgnoreCase(nomeDepartamento)) {
+                return departamento;
+            }
+        }
+        return null;
+    }
+
+    public Pedido encontrarPedidosPorSolicitante(Usuario solicitante) {
+        for (Pedido pedido : pedidos) {
+            if (pedido.getSolicitante().equals(solicitante)) {
+                return pedido;
+            }
+        }
+        return null;
+    }
+
 }
