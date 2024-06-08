@@ -1,3 +1,8 @@
-public class App {
+import java.util.Scanner;
 
+public class App {
+    
+    Sistema sistema = new Sistema();;
+    Usuario usuarioAtual;
+    Scanner scanner = new Scanner(System.in);
 }
