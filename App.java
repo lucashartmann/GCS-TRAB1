@@ -91,4 +91,19 @@ public class App {
         } while (opcao != 0);
         scanner.close();
     }
+
+    public void criarNovoDepartamento() {
+        System.out.println("Criar Novo Departamento:");
+        System.out.print("Nome do Departamento: ");
+        String nome = scanner.nextLine();
+        if (sistema.encontrarDepartamentoPorNome(nome) != null) {
+            System.out.println("Departamento já existe.");
+            return;
+        }
+        System.out.print("Valor Máximo Permitido por Pedido: ");
+        double valorMaximo = scanner.nextDouble();
+        Departamento novoDepartamento = new Departamento(nome, valorMaximo);
+        sistema.adicionarDepartamento(novoDepartamento);
+        System.out.println("Departamento criado com sucesso!");
+    }
 }
