@@ -140,4 +140,40 @@ public class Sistema {
         }
     }
 
+    
+    public void exibirEstatisticasGerais() {
+        int totalPedidos = pedidos.size();
+        int pedidosAprovados = 0;
+        int pedidosReprovados = 0;
+        for (Pedido pedido : pedidos) {
+            if (pedido.getStatus().equalsIgnoreCase("aprovado")) {
+                pedidosAprovados++;
+            } else if (pedido.getStatus().equalsIgnoreCase("reprovado")) {
+                pedidosReprovados++;
+            }
+        }
+        double percentualAprovados = (double) pedidosAprovados / totalPedidos * 100;
+        double percentualReprovados = (double) pedidosReprovados / totalPedidos * 100;
+        Date dataAtual = new Date();
+        Date dataInicio = new Date(dataAtual.getTime() - 30 * 24 * 60 * 60 * 1000);
+        int pedidosUltimos30Dias = 0;
+        double valorTotalPedidosUltimos30Dias = 0;
+        for (Pedido pedido : pedidos) {
+            if (pedido.getDataPedido().after(dataInicio)) {
+                pedidosUltimos30Dias++;
+                valorTotalPedidosUltimos30Dias += pedido.getValorTotal();
+            }
+        }
+        double valorMedioPedidosUltimos30Dias = 0;
+        if (pedidosUltimos30Dias != 0) {
+            valorMedioPedidosUltimos30Dias = valorTotalPedidosUltimos30Dias / pedidosUltimos30Dias;
+        }
+        System.out.println("Estatísticas Gerais:");
+        System.out.println("Número total de pedidos: " + totalPedidos);
+        System.out.println("Número de pedidos aprovados: " + pedidosAprovados + " (" + percentualAprovados + "%)");
+        System.out.println("Número de pedidos reprovados: " + pedidosReprovados + " (" + percentualReprovados + "%)");
+        System.out.println("Número de pedidos nos últimos 30 dias: " + pedidosUltimos30Dias);
+        System.out.println("Valor médio dos pedidos nos últimos 30 dias: " + valorMedioPedidosUltimos30Dias);
+    }
+
 }
