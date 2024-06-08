@@ -12,7 +12,7 @@ public class App {
         menu();
     }
 
-    private void inicializar() {
+    public void inicializar() {
         Departamento Financeiro = new Departamento("Financeiro", 1000.0);
         Departamento RH = new Departamento("RH", 1500.0);
         Departamento Engenharia = new Departamento("Engenharia", 2000.0);
@@ -29,5 +29,66 @@ public class App {
         sistema.adicionarUsuario(Alice);
         sistema.adicionarUsuario(Bob);
         sistema.adicionarUsuario(Carol);
+    }
+
+    public void menu() {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+        do {
+            System.out.println("\n----- Menu -----");
+            System.out.println("1 -- Registrar um novo pedido de aquisição");
+            System.out.println("2 -- Avaliar um pedido que esteja aberto para aprová-lo ou rejeitá-lo");
+            System.out.println("3 -- Listar todos os pedidos entre duas datas");
+            System.out.println("4 -- Buscar pedidos por funcionário solicitante");
+            System.out.println("5 -- Buscar pedidos pela descrição de um item");
+            System.out.println("6 -- Visualizar os detalhes de um pedido para aprová-lo ou rejeitá-lo");
+            System.out.println("7 -- Estatísticas Gerais");
+            System.out.println("8 -- Trocar o usuário atual");
+            System.out.println("9 -- Criar um usuário");
+            System.out.println("10 -- Criar um departamento");
+            System.out.println("0 -- Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (opcao) {
+                case 1:
+                    registrarNovoPedido();
+                    break;
+                case 2:
+                    avaliarPedido();
+                    break;
+                case 3:
+                    listarPedidosEntreDatas();
+                    break;
+                case 4:
+                    buscarPedidosPorFuncionario();
+                    break;
+                case 5:
+                    buscarPedidosPelaDescricaoItem();
+                    break;
+                case 6:
+                    visualizarDetalhesPedido();
+                    break;
+                case 7:
+                    exibirEstatisticasGerais();
+                    break;
+                case 8:
+                    selecionarUsuarioAtual();
+                    break;
+                case 9:
+                    criarNovoUsuario();
+                    break;
+                case 10:
+                    criarNovoDepartamento();
+                    break;
+                case 0:
+                    System.out.println("Saindo...");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
+            }
+        } while (opcao != 0);
+        scanner.close();
     }
 }
